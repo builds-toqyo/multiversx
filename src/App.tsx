@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router'
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/out/react/account/useGetAccountInfo'
-import Dashboard from './pages/Dashboard'
-import Transactions from './pages/Transactions'
-import Settings from './pages/Settings'
-import WalletConnect from './components/WalletConnect'
-import Navigation from './components/Navigation'
+import Dashboard from '@/pages/Dashboard'
+import Transactions from '@/pages/Transactions'
+import Settings from '@/pages/Settings'
+import WalletConnect from '@/components/WalletConnect'
+import Navigation from '@/components/Navigation'
 import './App.css'
 
 function App() {
