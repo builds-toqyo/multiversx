@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router'
+import { toast } from 'sonner'
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/out/react/account/useGetAccountInfo'
 import { getAccountProvider } from '@multiversx/sdk-dapp/out/providers/helpers/accountProvider'
 import { Home, ArrowLeftRight, Settings, LogOut, Wallet, Send } from 'lucide-react'
@@ -9,8 +10,19 @@ const Navigation = () => {
   const location = useLocation()
 
   const handleLogout = async () => {
-    const provider = getAccountProvider()
-    await provider.logout()
+    try {
+      const provider = getAccountProvider()
+      await provider.logout()
+      toast.success('Logged Out', {
+        description: 'You have been successfully logged out',
+        duration: 3000
+      })
+    } catch (error) {
+      toast.error('Logout Failed', {
+        description: 'Failed to logout. Please try again.',
+        duration: 3000
+      })
+    }
   }
 
   const isActive = (path: string) => location.pathname === path

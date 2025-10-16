@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import { toast } from 'sonner'
 import { Address, Transaction } from '@multiversx/sdk-core'
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/out/react/account/useGetAccountInfo'
 import { useGetAccount } from '@multiversx/sdk-dapp/out/react/account/useGetAccount'
@@ -36,7 +37,6 @@ const Send = () => {
         throw new Error('Invalid recipient address')
       }
 
-      // Refresh account to get latest nonce
       await refreshAccount()
 
       const amountInWei = BigInt(Math.floor(parseFloat(amount) * Math.pow(10, 18)))
@@ -59,6 +59,11 @@ const Send = () => {
 
       const txManager = TransactionManager.getInstance()
       const sentTransactions = await txManager.send(signedTransactions)
+      
+      toast.info('Transaction Sent', {
+        description: 'Your transaction is being processed...',
+        duration: 3000
+      })
       
       await txManager.track(sentTransactions, {
         transactionsDisplayInfo: {
