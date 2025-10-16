@@ -1,10 +1,14 @@
+import { useNavigate } from 'react-router'
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/out/react/account/useGetAccountInfo'
 import { useGetAccount } from '@multiversx/sdk-dapp/out/react/account/useGetAccount'
-import { formatAmount } from '@multiversx/sdk-dapp/out/lib/sdkDappUtils'
-import { Wallet, Copy, ExternalLink, RefreshCw } from 'lucide-react'
+import { Wallet, Copy, ExternalLink, RefreshCw, Send } from 'lucide-react'
 import { useState } from 'react'
+import { routeNames } from '@/routes'
+import { AuthRedirectWrapper } from '@/wrappers'
+import { FormatAmount } from '@/components/FormatAmount'
 
 const Dashboard = () => {
+  const navigate = useNavigate()
   const { address } = useGetAccountInfo()
   const { balance, nonce } = useGetAccount()
   const [copied, setCopied] = useState(false)
@@ -25,7 +29,8 @@ const Dashboard = () => {
   const explorerUrl = import.meta.env.VITE_MULTIVERSX_EXPLORER_URL || 'https://devnet-explorer.multiversx.com'
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
+    <AuthRedirectWrapper>
+      <div className="max-w-6xl mx-auto space-y-6 w-full">
       <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl shadow-xl p-8 text-white">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-3">
@@ -50,7 +55,7 @@ const Dashboard = () => {
           <div>
             <p className="text-blue-100 text-sm mb-1">Balance</p>
             <p className="text-4xl font-bold">
-              {formatAmount({ input: balance, decimals: 18, digits: 4 })} xEGLD
+              <FormatAmount value={balance} />
             </p>
           </div>
 
@@ -120,11 +125,18 @@ const Dashboard = () => {
 
       <div className="bg-white rounded-xl shadow-md p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button className="flex items-center justify-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <button 
+            onClick={() => navigate(routeNames.send)}
+            className="flex items-center justify-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <Send className="w-5 h-5" />
             <span className="font-medium">Send Transaction</span>
           </button>
-          <button className="flex items-center justify-center space-x-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+          <button 
+            onClick={() => navigate(routeNames.transactions)}
+            className="flex items-center justify-center space-x-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+          >
             <span className="font-medium">Receive</span>
           </button>
           <a
@@ -138,7 +150,8 @@ const Dashboard = () => {
           </a>
         </div>
       </div>
-    </div>
+      </div>
+    </AuthRedirectWrapper>
   )
 }
 

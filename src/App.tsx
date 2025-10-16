@@ -1,30 +1,32 @@
-import { Routes, Route } from 'react-router'
-import { useGetAccountInfo } from '@multiversx/sdk-dapp/out/react/account/useGetAccountInfo'
-import Dashboard from '@/pages/Dashboard'
-import Transactions from '@/pages/Transactions'
-import Settings from '@/pages/Settings'
-import WalletConnect from '@/components/WalletConnect'
-import Navigation from '@/components/Navigation'
+import { Routes, Route, Navigate } from 'react-router'
+import { Toaster } from 'sonner'
+import { routes, routeNames } from '@/routes'
+import { Layout } from '@/components/Layout'
+import { TransactionStatus } from '@/components/TransactionStatus'
+import Unlock from '@/pages/Unlock'
 import './App.css'
 
 function App() {
-  const { address } = useGetAccountInfo()
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navigation />
-      <main className="container mx-auto px-4 py-8">
-        {!address ? (
-          <WalletConnect />
-        ) : (
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/transactions" element={<Transactions />} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
-        )}
-      </main>
-    </div>
+    <Layout>
+      <Toaster position="top-right" richColors closeButton />
+      <TransactionStatus />
+      <Routes>
+        <Route path={routeNames.unlock} element={<Unlock />} />
+        {routes.map((route) => {
+          const RouteComponent = route.component
+
+          return (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={<RouteComponent />}
+            />
+          )
+        })}
+        <Route path="*" element={<Navigate to={routeNames.home} replace />} />
+      </Routes>
+    </Layout>
   )
 }
 

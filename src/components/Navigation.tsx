@@ -1,15 +1,28 @@
 import { Link, useLocation } from 'react-router'
+import { toast } from 'sonner'
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/out/react/account/useGetAccountInfo'
 import { getAccountProvider } from '@multiversx/sdk-dapp/out/providers/helpers/accountProvider'
-import { Home, ArrowLeftRight, Settings, LogOut, Wallet } from 'lucide-react'
+import { Home, ArrowLeftRight, Settings, LogOut, Wallet, Send } from 'lucide-react'
+import { routeNames } from '@/routes'
 
 const Navigation = () => {
   const { address } = useGetAccountInfo()
   const location = useLocation()
 
   const handleLogout = async () => {
-    const provider = getAccountProvider()
-    await provider.logout()
+    try {
+      const provider = getAccountProvider()
+      await provider.logout()
+      toast.success('Logged Out', {
+        description: 'You have been successfully logged out',
+        duration: 3000
+      })
+    } catch (error) {
+      toast.error('Logout Failed', {
+        description: 'Failed to logout. Please try again.',
+        duration: 3000
+      })
+    }
   }
 
   const isActive = (path: string) => location.pathname === path
@@ -40,9 +53,9 @@ const Navigation = () => {
           
           <div className="flex items-center space-x-6">
             <Link
-              to="/"
+              to={routeNames.dashboard}
               className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                isActive('/') 
+                isActive(routeNames.dashboard) 
                   ? 'bg-blue-50 text-blue-600' 
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
@@ -50,11 +63,23 @@ const Navigation = () => {
               <Home className="w-5 h-5" />
               <span className="font-medium">Dashboard</span>
             </Link>
+
+            <Link
+              to={routeNames.send}
+              className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+                isActive(routeNames.send) 
+                  ? 'bg-blue-50 text-blue-600' 
+                  : 'text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <Send className="w-5 h-5" />
+              <span className="font-medium">Send</span>
+            </Link>
             
             <Link
-              to="/transactions"
+              to={routeNames.transactions}
               className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                isActive('/transactions') 
+                isActive(routeNames.transactions) 
                   ? 'bg-blue-50 text-blue-600' 
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
@@ -64,9 +89,9 @@ const Navigation = () => {
             </Link>
             
             <Link
-              to="/settings"
+              to={routeNames.settings}
               className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                isActive('/settings') 
+                isActive(routeNames.settings) 
                   ? 'bg-blue-50 text-blue-600' 
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
