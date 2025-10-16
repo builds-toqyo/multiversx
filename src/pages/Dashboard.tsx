@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router'
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/out/react/account/useGetAccountInfo'
 import { useGetAccount } from '@multiversx/sdk-dapp/out/react/account/useGetAccount'
-import { formatAmount } from '@multiversx/sdk-dapp/out/lib/sdkDappUtils'
 import { Wallet, Copy, ExternalLink, RefreshCw, Send } from 'lucide-react'
 import { useState } from 'react'
 import { routeNames } from '@/routes'
 import { AuthRedirectWrapper } from '@/wrappers'
+import { FormatAmount } from '@/components/FormatAmount'
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -55,7 +55,7 @@ const Dashboard = () => {
           <div>
             <p className="text-blue-100 text-sm mb-1">Balance</p>
             <p className="text-4xl font-bold">
-              {formatAmount({ input: balance, decimals: 18, digits: 4 })} xEGLD
+              <FormatAmount value={balance} />
             </p>
           </div>
 
