@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router'
 import { UnlockPanelManager } from '@multiversx/sdk-dapp/out/managers/UnlockPanelManager'
 import { Wallet } from 'lucide-react'
+import { Button } from './ui/button'
 
 const WalletConnect = () => {
   const navigate = useNavigate()
@@ -36,12 +37,12 @@ const WalletConnect = () => {
         </div>
 
         <div className="text-center">
-          <button
+          <Button
             onClick={handleOpenUnlockPanel}
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors shadow-lg hover:shadow-xl"
           >
             Connect Wallet
-          </button>
+          </Button>
           <p className="text-sm text-gray-500 mt-4">
             Supports Extension, Web Wallet, xPortal, and Ledger
           </p>
