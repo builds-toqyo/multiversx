@@ -1,17 +1,97 @@
-# React + TypeScript + Vite
+# MultiversX Lite Wallet DApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚧 **Notice: This project is not production-ready.** 🚧
 
-Currently, two official plugins are available:
+A lightweight wallet dApp for interacting with the MultiversX blockchain, built with React, TypeScript, and Vite. This is a basic implementation inspired by [@multiversx/mx-lite-wallet-dapp](https://github.com/multiversx/mx-lite-wallet-dapp), providing the essentials for MultiversX authentication and transaction management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- 🔐 Multiple wallet connection methods (Extension, Web Wallet, xPortal, Ledger)
+- 💰 Account balance and transaction history
+- 🌐 Multi-network support (Devnet, Testnet, Mainnet)
+- 📱 Responsive design with modern UI
+- ⚡ Built with Vite for fast development
+- 🎨 Styled with TailwindCSS
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Requirements
 
-Note: This will impact Vite dev & build performances.
+- Node.js version >=22
+- npm version >=10
+
+## Getting Started
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+### Configuration
+
+1. Update the `.env` file with your configuration:
+
+```env
+VITE_ENVIRONMENT="devnet"
+VITE_APP_PERSIST="localStorage"
+VITE_WALLETCONNECT_PROJECT_ID="your_project_id_here"
+```
+
+2. The app supports multiple networks (devnet, testnet, mainnet). Configuration files are located in `src/config/`.
+
+### Running the Application
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+## Project Structure
+
+```
+src/
+├── components/       # Reusable UI components
+│   ├── Navigation.tsx
+│   └── WalletConnect.tsx
+├── config/          # Network configurations
+│   ├── config.devnet.ts
+│   ├── config.testnet.ts
+│   ├── config.mainnet.ts
+│   └── index.ts
+├── pages/           # Main application pages
+│   ├── Dashboard.tsx
+│   ├── Transactions.tsx
+│   └── Settings.tsx
+├── App.tsx          # Main app component
+└── main.tsx         # Application entry point
+```
+
+## Security Notice
+
+⚠️ **This is a development wallet. Never use it with real funds on mainnet.**
+
+- Always verify transactions before signing
+- Keep your private keys and seed phrases secure
+- Never share your credentials with anyone
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the MIT License.
 
 ## Expanding the ESLint configuration
 
