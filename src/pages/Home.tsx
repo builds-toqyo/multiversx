@@ -4,6 +4,7 @@ import { Wallet, Shield, Zap, Lock } from 'lucide-react'
 import { routeNames } from '@/routes'
 import { AuthRedirectWrapper } from '@/wrappers'
 import { useEffect } from 'react'
+import { Button } from '@/components/ui/button'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -35,12 +36,12 @@ const Home = () => {
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             A lightweight, secure wallet for the MultiversX blockchain. Send, receive, and manage your digital assets with ease.
           </p>
-          <button
+          <Button
             onClick={handleConnect}
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-10 py-4 rounded-lg text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
           >
             Connect Wallet
-          </button>
+          </Button>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
