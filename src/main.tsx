@@ -17,7 +17,16 @@ const config: InitAppType = {
   },
   dAppConfig: {
     environment,
-    network: networkConfig
+    network: networkConfig,
+    transactionTracking: {
+      successfulToastLifetime: 5000,
+      onSuccess: async (sessionId: string) => {
+        console.log('Transaction session successful:', sessionId)
+      },
+      onFail: async (sessionId: string) => {
+        console.error('Transaction session failed:', sessionId)
+      }
+    }
   }
 }
 

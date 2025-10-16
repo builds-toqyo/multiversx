@@ -1,16 +1,13 @@
-/* Additional app-specific styles */
 .container {
   max-width: 1280px;
 }
 
-/* Smooth transitions */
 * {
   transition-property: background-color, border-color, color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

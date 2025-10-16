@@ -1,12 +1,14 @@
 import { Routes, Route, Navigate } from 'react-router'
 import { routes, routeNames } from '@/routes'
 import { Layout } from '@/components/Layout'
+import { TransactionStatus } from '@/components/TransactionStatus'
 import Unlock from '@/pages/Unlock'
 import './App.css'
 
 function App() {
   return (
     <Layout>
+      <TransactionStatus />
       <Routes>
         <Route path={routeNames.unlock} element={<Unlock />} />
         {routes.map((route) => {
