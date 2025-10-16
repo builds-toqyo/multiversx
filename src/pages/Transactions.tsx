@@ -3,6 +3,7 @@ import { ExternalLink, ArrowUpRight, ArrowDownLeft, Clock } from 'lucide-react'
 import { formatAmount } from '@multiversx/sdk-dapp/out/lib/sdkDappUtils'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { AuthRedirectWrapper } from '@/wrappers'
 
 const Transactions = () => {
   const { address } = useGetAccountInfo()
@@ -48,12 +49,14 @@ const Transactions = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="bg-white rounded-2xl shadow-lg p-8">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Transactions</h1>
-            <p className="text-gray-600 mt-1">View your transaction history</p>
+    <AuthRedirectWrapper>
+      <div className="max-w-6xl mx-auto w-full">
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Transactions</h1>
+              <p className="text-gray-600 mt-1">View your transaction history</p>
+            </div>
           </div>
         </div>
 
@@ -172,7 +175,7 @@ const Transactions = () => {
           </div>
         )}
       </div>
-    </div>
+    </AuthRedirectWrapper>
   )
 }
 

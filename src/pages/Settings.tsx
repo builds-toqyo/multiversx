@@ -1,5 +1,6 @@
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/out/react/account/useGetAccountInfo'
 import { Settings as SettingsIcon, Network, Info, Shield, ExternalLink } from 'lucide-react'
+import { AuthRedirectWrapper } from '@/wrappers'
 
 const Settings = () => {
   const { address } = useGetAccountInfo()
@@ -9,7 +10,8 @@ const Settings = () => {
   const walletUrl = import.meta.env.VITE_MULTIVERSX_WALLET_URL || 'https://devnet-wallet.multiversx.com'
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <AuthRedirectWrapper>
+      <div className="max-w-4xl mx-auto w-full">
       <div className="bg-white rounded-2xl shadow-lg p-8">
         <div className="flex items-center space-x-3 mb-8">
           <div className="bg-blue-100 p-3 rounded-lg">
@@ -147,7 +149,8 @@ const Settings = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </AuthRedirectWrapper>
   )
 }
 

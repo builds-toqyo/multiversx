@@ -9,6 +9,7 @@ import { GAS_PRICE, GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants/mvx.con
 import { refreshAccount } from '@multiversx/sdk-dapp/out/utils/account/refreshAccount'
 import { ArrowLeft, Send as SendIcon, AlertCircle } from 'lucide-react'
 import { routeNames } from '@/routes'
+import { AuthRedirectWrapper } from '@/wrappers'
 
 const Send = () => {
   const navigate = useNavigate()
@@ -83,7 +84,8 @@ const Send = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <AuthRedirectWrapper>
+      <div className="w-full py-8">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <button
@@ -175,7 +177,8 @@ const Send = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </AuthRedirectWrapper>
   )
 }
 

@@ -5,6 +5,7 @@ import { formatAmount } from '@multiversx/sdk-dapp/out/lib/sdkDappUtils'
 import { Wallet, Copy, ExternalLink, RefreshCw, Send } from 'lucide-react'
 import { useState } from 'react'
 import { routeNames } from '@/routes'
+import { AuthRedirectWrapper } from '@/wrappers'
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -28,7 +29,8 @@ const Dashboard = () => {
   const explorerUrl = import.meta.env.VITE_MULTIVERSX_EXPLORER_URL || 'https://devnet-explorer.multiversx.com'
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
+    <AuthRedirectWrapper>
+      <div className="max-w-6xl mx-auto space-y-6 w-full">
       <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl shadow-xl p-8 text-white">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-3">
@@ -148,7 +150,8 @@ const Dashboard = () => {
           </a>
         </div>
       </div>
-    </div>
+      </div>
+    </AuthRedirectWrapper>
   )
 }
 

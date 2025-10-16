@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router'
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/out/react/account/useGetAccountInfo'
 import { Wallet, Shield, Zap, Lock } from 'lucide-react'
 import { routeNames } from '@/routes'
+import { AuthRedirectWrapper } from '@/wrappers'
 import { useEffect } from 'react'
 
 const Home = () => {
@@ -19,7 +20,8 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <AuthRedirectWrapper requireAuth={false}>
+      <div className="w-full bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
@@ -93,7 +95,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </AuthRedirectWrapper>
   )
 }
 
